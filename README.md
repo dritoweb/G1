@@ -1,2 +1,1 @@
-# G1
-La piñata feliz - Grupo 1
+# La piñata feliz - Grupo G1
