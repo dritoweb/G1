@@ -7,7 +7,7 @@ function CrearBD($c){
 	mysqli_query ($c, "CREATE DATABASE IF NOT EXISTS $base");
 	mysqli_select_db($c,"$base");
 }
-function conexionBD($c){
+function conexionBD(&$c,&$usuario,&$contraseña){
 
 	$base="LA_PIÑATA_FELIZ";
 	$c=mysqli_connect("localhost",$usuario,$contraseña);
@@ -16,7 +16,7 @@ function conexionBD($c){
 
 function CrearTabla(){
 
-	conexionBD($c);
+	conexionBD($c,$usu,$contra);
 
 	myqli_query($c,"CREATE TABLE IF NOT EXISTS animadores(idAnimador CHAR(3), NombreAnimador VARCHAR(20), Especialidad VARCHAR(20), Precio FLOAT(5,2),
 		PRIMARY KEY (idAnimador))");
@@ -27,7 +27,7 @@ function CrearTabla(){
 
 function NuevosClientes(){
 
-	conexionBD($c);
+	conexionBD($c,$usu,$contra);
 	
 	$Usuario=$_POST['usuario'];
 	$Nombre=$_POST['nombre'];
@@ -38,12 +38,26 @@ function NuevosClientes(){
 
 }
 
-function logearse(){
+function logearse(&$username,&$password){
 
 	$Usuario=$_POST['usuario']
-	$contra=$_POST['contra']
+	$password=$_POST['contra']
 
-		if ()
+		if ($usuario=="admin"){
+
+			$usu="adminstrador"
+			$contra= "123456"
+			conexionBD($c,$usu,$contra);
+			
+		}else{
+			
+			$usu="usuario"
+			$contra= "usuario"
+			conexionBD($c,$usu,$contra);
+
+		}
+		$_SESSION['usuario']=$usuario;
+		
 }
 
 ?>
