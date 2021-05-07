@@ -43,20 +43,48 @@ function logearse(&$username,&$password){
 	$Usuario=$_POST['usuario']
 	$password=$_POST['contra']
 
-		if ($usuario=="admin"){
+		if ($usuario=="admin" && $password=="123456"){
 
 			$usu="adminstrador"
 			$contra= "123456"
 			conexionBD($c,$usu,$contra);
+
 			
 		}else{
 			
-			$usu="usuario"
-			$contra= "usuario"
 			conexionBD($c,$usu,$contra);
+
+			$array_Clientes=mysqli_query($c,"SELECT nombreCliente FROM Clientes");
+
+			while ($array_Clientes = mysqli_fetch_row($array_Clientes)){
+       
+				# insertamos un salto de l�nea en la tabla HTML
+		 
+				echo "<tr>";
+		 
+				# establecemos el bucle de lectura del ARRAY
+				# con los resultados de cada LINEA
+				# y encerramos cada valor en etiquetas <td></td>
+				# para que aparezcan en celdas distintas de la tabla
+		 
+				foreach($array_Clientes  as $clave){
+				echo "<td>",$clave,"</td>";
+
+				if($usuario==$clave){
+					$usu=$usuario;
+					$contra=$password;
+					conexionBD($c,$usu,$contra);
+				}else{
+
+					echo "Este usuario no esta registrado";
+				}
+		  }
+		 }
+
 
 		}
 		$_SESSION['usuario']=$usuario;
+
 		
 }
 
