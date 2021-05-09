@@ -1,144 +1,91 @@
 <?php
 
-function conectar_base(){
-    
-    $base="LA_PI�ATA_FELIZ";
-    $c=mysqli_connect("localhost","administrador","123456");
-    
-    
-    
+function CrearBD($c){
+
+	$base="LA_PIÑATA_FELIZ";
+	$c=mysqli_connect("localhost","administrador","123456");
+	mysqli_query ($c, "CREATE DATABASE IF NOT EXISTS $base");
+	mysqli_select_db($c,"$base");
+}
+function conexionBD(&$c,&$usuario,&$contraseña){
+
+	$base="LA_PIÑATA_FELIZ";
+	$c=mysqli_connect("localhost",$usuario,$contraseña);
+	mysli_connect($c,"$base");
 }
 
-function buscaranimadores(){
-        
-        $tabla="animadores";
-          
-        conectar_base();
-        
-        mysqli_select_db($c, $base);
-        
-        $resultado= mysqli_query($c, "SELECT * FROM $tabla");
-        
-        echo "<table align=center border=2>";
-            echo "<tr>";
-                echo"<td>IDANIMADOR</td>";
-                echo"<td>NOMBRE_ANIMADOR</td>";
-                echo"<td>ESPECIALIDAD</td>";
-                echo"<td>PRECIO</td>";
-            echo "</tr>";
-            
-        while ($registro = mysqli_fetch_row($resultado)){
-            echo "<tr>";
-                  foreach($registro  as $clave){
-            echo "<td>",$clave,"</td>";
-         }
-        }
-         echo "</table>";
-         mysqli_close($c);
+function CrearTabla(){
 
-}
-function buscarfiestas(){
-    
-     $tabla="fiestas";
-          
-        conectar_base();
-        
-        mysqli_select_db($c, $base);
-        
-        $resultado= mysqli_query($c, "SELECT * FROM $tabla");
-        
-        echo "<table align=center border=2>";
-            echo "<tr>";
-                echo"<td>IDCLIENTE</td>";
-                echo"<td>NOMBRE_CLIENTE</td>";
-                echo"<td>DIRECCI�N</td>";
-                echo"<td>EMAIL</td>";
-            echo "</tr>";
-            
-        while ($registro = mysqli_fetch_row($resultado)){
-            echo "<tr>";
-                  foreach($registro  as $clave){
-            echo "<td>",$clave,"</td>";
-         }
-        }
-         echo "</table>";
-         mysqli_close($c);
-    
-}
-function buscarfiestasporcliente(){
-    
-        $tabla1="fiestas";
-        $tabla2="clientes";
-        $tabla3="animadores";
-        $tabla4="tiposdefiestas";
-          
-        conectar_base();
-        
-        mysqli_select_db($c, $base);
-        
-        $resultado= mysqli_query($c, "SELECT $tabla2.NombreCliente,$tabla2.Email,$tabla2.Direccion,$tabla1.IdFiesta,$tabla1.Fecha,$tabla1.Duracion,
-        $tabla4.NombreFiesta,$tabla1.Numero,$tabla1.EdadMedia,$tabla3.Especialidad,
-        $tabla3.NombreAnimador FROM (($tabla1 JOIN $tabla2 on $tabla1.IdFiesta=$tabla2.IdFiesta) JOIN $tabla3 on $tabla1.Especialidad=$tabla3.Especialidad)
-        join $tabla4 on $tabla1.IdFiesta=$tabla4.IdFiesta where $IdCliente = '$codigo' ");
-        
-        echo "<table align=center border=2>";
-            echo "<tr>";
-                echo"<td>IDANIMADOR</td>";
-                echo"<td>NOMBRE_ANIMADOR</td>";
-                echo"<td>ESPECIALIDAD</td>";
-                echo"<td>PRECIO</td>";
-            echo "</tr>";
-            
-        while ($registro = mysqli_fetch_row($resultado)){
-            echo "<tr>";
-                  foreach($registro  as $clave){
-            echo "<td>",$clave,"</td>";
-         }
-        }
-         echo "</table>";
-         mysqli_close($c);
-    
-    
+	conexionBD($c,$usu,$contra);
+
+	myqli_query($c,"CREATE TABLE IF NOT EXISTS animadores(idAnimador CHAR(3), NombreAnimador VARCHAR(20), Especialidad VARCHAR(20), Precio FLOAT(5,2),
+		PRIMARY KEY (idAnimador))");
+
+	myqli_query($c,"CREATE TABLE IF NOT EXISTS Clientes(idCliente CHAR(3), NombreCliente VARCHAR(20), Direccion VARCHAR(20),Email VARCHAR(20), PRIMARY KEY(idCliente))");
+    myqli_query($c,"CREATE TABLE IF NOT EXISTS Fiestas(idFiesta CHAR(3), Fecha DATE, Especialidad VARCHAR(20), Duraccion INT(3), TipodeFiesta VARCHAR(15), Numero , EdadMedia INT(2), Importe FLOAT(5,2), IdCliente, PRIMARY KEY (idFiesta))");
 }
 
+function NuevosClientes(){
+
+	conexionBD($c,$usu,$contra);
+	
+	$Usuario=$_POST['usuario'];
+	$Nombre=$_POST['nombre'];
+	$Direccion=$_POST['direccion'];
+	$Email=$_POST['email']
+
+	mysqli_query($c,"INSERT Clientes(UsuarioCliente,NombreCliente,Direccion,Email) VALUES ($Usuario,$nombre,$Direccion,$Email)")
+
+}
+
+function logearse(&$username,&$password){
+
+	$Usuario=$_POST['usuario']
+	$password=$_POST['contra']
+
+		if ($usuario=="admin" && $password=="123456"){
+
+			$usu="adminstrador"
+			$contra= "123456"
+			conexionBD($c,$usu,$contra);
+
+			
+		}else{
+			
+			conexionBD($c,$usu,$contra);
+
+			$array_Clientes=mysqli_query($c,"SELECT nombreCliente FROM Clientes");
+
+			while ($array_Clientes = mysqli_fetch_row($array_Clientes)){
+       
+				# insertamos un salto de l�nea en la tabla HTML
+		 
+				echo "<tr>";
+		 
+				# establecemos el bucle de lectura del ARRAY
+				# con los resultados de cada LINEA
+				# y encerramos cada valor en etiquetas <td></td>
+				# para que aparezcan en celdas distintas de la tabla
+		 
+				foreach($array_Clientes  as $clave){
+				echo "<td>",$clave,"</td>";
+
+				if($usuario==$clave){
+					$usu=$usuario;
+					$contra=$password;
+					conexionBD($c,$usu,$contra);
+				}else{
+
+					echo "Este usuario no esta registrado";
+				}
+		  }
+		 }
 
 
+		}
+		$_SESSION['usuario']=$usuario;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		
+}
 
 ?>

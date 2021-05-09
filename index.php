@@ -32,7 +32,7 @@
             if(!isset($_SESSION['usuario'])){
           ?>
             
-            <a class="navbar-brand text-success" href="#">INICIAR SESIoN</a>
+            <a class="navbar-brand text-success" href="formularios/formurlogin.html">INICIAR SESIoN</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -83,6 +83,9 @@
             elseif(isset($_SESSION['usuario']))
             {
             ?>
+                  <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">CERRAR SESIoN</a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">ALTA USUARIO</a>
                 </li>
