@@ -29,6 +29,7 @@
             <nav class="navbar navbar-expand-lg " >
           <div class="container-fluid " >
           <?php
+            session_start();
             if(!isset($_SESSION['usuario'])){
           ?>
             <h1>SESIoN NO INICIADA </h1>
@@ -40,8 +41,11 @@
             
              <?php
              }
-            elseif(isset($_SESSION['usuario']) and $_SESSION['usuario']=='administracion' and $_SESSION['contra']==123456)
+            else
             {
+                if( $_SESSION['usuario']=='administracion')
+            {
+            
             ?>
             
             <h1>SESIoN INICIADA POR <?php $_SESSION['usuario'] ?></h1>
@@ -83,7 +87,7 @@
                 </li>
             <?php
             }
-            elseif(isset($_SESSION['usuario']))
+            else
             {
             ?>
             
@@ -108,7 +112,8 @@
                 
               </ul>
             <?php
-                 }
+                }
+            }
             ?>
               
             </div>
