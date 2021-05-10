@@ -51,7 +51,8 @@ function logearse(&$username,&$password){
 
 			
 		}else{
-			
+			$usu="usuapp"
+			$contra= "123"
 			conexionBD($c,$usu,$contra);
 
 			$array_Clientes=mysqli_query($c,"SELECT nombreCliente FROM Clientes");
