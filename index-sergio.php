@@ -32,7 +32,7 @@
             session_start();
             if(!isset($_SESSION['usuario'])){
           ?>
-            <h1>SESIoN NO INICIADA </h1>
+            <h5>SESIoN NO INICIADA </h5>
             
             <a class="navbar-brand text-success" href="formularios/formurlogin.html">INICIAR SESIoN</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
             
             ?>
             
-            <h1>SESIoN INICIADA POR <?php $_SESSION['usuario'] ?></h1>
+            <h1>SESIoN INICIADA POR <?php $_SESSION['usuario']; ?></h1>
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -80,8 +80,8 @@
                     CONSULTAS
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="formularios/formubuscar?animador">ANIMADORES</a></li>
-                    <li><a class="dropdown-item" href="formularios/formubuscar?fiesta">FIESTAS</a></li>
+                    <li><a class="dropdown-item" href="principal/principal?buscaranimadores">ANIMADORES</a></li>
+                    <li><a class="dropdown-item" href="principal/principal?buscarfiestas">FIESTAS</a></li>
                     <li><a class="dropdown-item" href="formularios/formubuscar?fiestacliente">FIESTAS POR CLIENTE</a></li>
                   </ul>
                 </li>
@@ -91,7 +91,7 @@
             {
             ?>
             
-            <h1>SESIoN INICIADA POR <?php $_SESSION['usuario'] ?></h1>
+            <h1>SESIoN INICIADA POR <?php $_SESSION['usuario']; ?></h1>
             
                   <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="codigo/principal?cerrarsesion">CERRAR SESIoN</a>
