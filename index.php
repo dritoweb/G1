@@ -31,6 +31,7 @@
           <?php
             if(!isset($_SESSION['usuario'])){
           ?>
+            <h1>SESIoN NO INICIADA </h1>
             
             <a class="navbar-brand text-success" href="formularios/formurlogin.html">INICIAR SESIoN</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,10 +44,12 @@
             {
             ?>
             
+            <h1>SESIoN INICIADA POR <?php $_SESSION['usuario'] ?></h1>
+            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">CERRAR SESIoN</a>
+                  <a class="nav-link active" aria-current="page" href="codigo/principal?cerrarsesion">CERRAR SESIoN</a>
                 </li>
                 
                 <li class="nav-item dropdown">
@@ -54,8 +57,8 @@
                     OPERACIONES ESTRUCTURAS
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">CREAR ESTRUCTURA</a></li>
-                    <li><a class="dropdown-item" href="#">BORRAR ESTRUCTURA</a></li>
+                    <li><a class="dropdown-item" href="codigo/principal.php?crearBD">CREAR ESTRUCTURA</a></li>
+                    <li><a class="dropdown-item" href="codigo/principal.php?borrarBD">BORRAR ESTRUCTURA</a></li>
                   </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -63,9 +66,9 @@
                     ANIMADORES
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">ALTA</a></li>
-                    <li><a class="dropdown-item" href="#">MODIFICACIONES</a></li>
-                    <li><a class="dropdown-item" href="#">BAJA</a></li>
+                    <li><a class="dropdown-item" href="formularios/formualtanimador.php?alta">ALTA</a></li>
+                    <li><a class="dropdown-item" href="formularios/formualtanimador.php?modificar">MODIFICACIONES</a></li>
+                    <li><a class="dropdown-item" href="codigo/principal.php?bajanimador">BAJA</a></li>
                   </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -73,9 +76,9 @@
                     CONSULTAS
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">ANIMADORES</a></li>
-                    <li><a class="dropdown-item" href="#">FIESTAS</a></li>
-                    <li><a class="dropdown-item" href="#">FIESTAS POR CLIENTE</a></li>
+                    <li><a class="dropdown-item" href="formularios/formubuscar?animador">ANIMADORES</a></li>
+                    <li><a class="dropdown-item" href="formularios/formubuscar?fiesta">FIESTAS</a></li>
+                    <li><a class="dropdown-item" href="formularios/formubuscar?fiestacliente">FIESTAS POR CLIENTE</a></li>
                   </ul>
                 </li>
             <?php
@@ -83,11 +86,14 @@
             elseif(isset($_SESSION['usuario']))
             {
             ?>
+            
+            <h1>SESIoN INICIADA POR <?php $_SESSION['usuario'] ?></h1>
+            
                   <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">CERRAR SESIoN</a>
+                  <a class="nav-link active" aria-current="page" href="codigo/principal?cerrarsesion">CERRAR SESIoN</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">ALTA USUARIO</a>
+                  <a class="nav-link" href="formularios/formuregistro.html">ALTA USUARIO</a>
                 </li>
                  <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
