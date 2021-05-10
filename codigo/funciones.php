@@ -58,17 +58,10 @@ function logearse(&$username,&$password){
 
 			while ($array_Clientes = mysqli_fetch_row($array_Clientes)){
        
-				# insertamos un salto de l�nea en la tabla HTML
 		 
-				echo "<tr>";
 		 
-				# establecemos el bucle de lectura del ARRAY
-				# con los resultados de cada LINEA
-				# y encerramos cada valor en etiquetas <td></td>
-				# para que aparezcan en celdas distintas de la tabla
 		 
 				foreach($array_Clientes  as $clave){
-				echo "<td>",$clave,"</td>";
 
 				if($usuario==$clave){
 					$usu=$usuario;
