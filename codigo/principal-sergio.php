@@ -15,6 +15,10 @@ if(isset($_GET['buscarfiestaporcliente'])){
         buscarfiestaporcliente();
 
 }
+if(isset($_GET['altaanimador'])){
+    
+    altaanimador();
+}
 
 
 

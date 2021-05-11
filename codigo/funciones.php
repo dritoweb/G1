@@ -32,27 +32,27 @@ function NuevosClientes(){
 	$Usuario=$_POST['usuario'];
 	$Nombre=$_POST['nombre'];
 	$Direccion=$_POST['direccion'];
-	$Email=$_POST['email']
+	$Email=$_POST['email'];
 
-	mysqli_query($c,"INSERT Clientes(UsuarioCliente,NombreCliente,Direccion,Email) VALUES ($Usuario,$nombre,$Direccion,$Email)")
+	mysqli_query($c,"INSERT Clientes(UsuarioCliente,NombreCliente,Direccion,Email) VALUES ('$Usuario','$nombre','$Direccion','$Email')");
 
 }
 
 function logearse(&$username,&$password){
 
-	$Usuario=$_POST['usuario']
-	$password=$_POST['contra']
+	$Usuario=$_POST['usuario'];
+	$password=$_POST['contra'];
 
 		if ($usuario=="admin" && $password=="123456"){
 
-			$usu="adminstrador"
-			$contra= "123456"
+			$usu="adminstrador";
+			$contra= "123456";
 			conexionBD($c,$usu,$contra);
 
 			
 		}else{
-			$usu="usuapp"
-			$contra= "123"
+			$usu="usuapp";
+			$contra= "123";
 			conexionBD($c,$usu,$contra);
 
 			$array_Clientes=mysqli_query($c,"SELECT nombreCliente FROM Clientes");
