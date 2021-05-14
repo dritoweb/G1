@@ -6,6 +6,7 @@ function CrearBD($c){
 	$c=mysqli_connect("localhost","administrador","123456");
 	mysqli_query ($c, "CREATE DATABASE IF NOT EXISTS $base");
 	mysqli_select_db($c,"$base");
+	mysli_exist($c);
 }
 function conexionBD(&$c,&$usuario,&$contraseña){
 
@@ -17,12 +18,46 @@ function conexionBD(&$c,&$usuario,&$contraseña){
 function CrearTabla(){
 
 	conexionBD($c,$usu,$contra);
+	
+	//CREAR TABLA ANIMADORES.
 
-	myqli_query($c,"CREATE TABLE IF NOT EXISTS animadores(idAnimador CHAR(3), NombreAnimador VARCHAR(20), Especialidad VARCHAR(20), Precio FLOAT(5,2),
+	myqli_query($c,"CREATE TABLE IF NOT EXISTS animadores(
+		idAnimador INT AUTO_INCREMENT,
+		NombreAnimador VARCHAR(20), 
+		Especialidad VARCHAR(20), 
+		Precio FLOAT(5,2),
 		PRIMARY KEY (idAnimador))");
+	
+	//CREAR TABLA CLIENTE.
 
-	myqli_query($c,"CREATE TABLE IF NOT EXISTS Clientes(idCliente CHAR(3), NombreCliente VARCHAR(20), Direccion VARCHAR(20),Email VARCHAR(20), PRIMARY KEY(idCliente))");
-    myqli_query($c,"CREATE TABLE IF NOT EXISTS Fiestas(idFiesta CHAR(3), Fecha DATE, Especialidad VARCHAR(20), Duraccion INT(3), TipodeFiesta VARCHAR(15), Numero , EdadMedia INT(2), Importe FLOAT(5,2), IdCliente, PRIMARY KEY (idFiesta))");
+	myqli_query($c,"CREATE TABLE IF NOT EXISTS Clientes(
+		idCliente INT AUTO_INCREMENT, 
+		NombreCliente VARCHAR(20), 
+		Direccion VARCHAR(20),
+		Email VARCHAR(20), 
+		PRIMARY KEY(idCliente))");
+
+	//CREAR TABLA FIESTAS.
+
+    myqli_query($c,"CREATE TABLE IF NOT EXISTS Fiestas(
+		idFiesta INT ,
+		Fecha DATE,
+		Especialidad VARCHAR(20),
+		Duraccion INT(3), 
+		TipodeFiesta VARCHAR(15), 
+		NUMERO INT, 
+		EdadMedia INT(2), 
+		Importe FLOAT(5,2), 
+		IdCliente INT, PRIMARY KEY (idFiesta),
+		FOREIGN KEY (IcCliente) REFERENCES CLIENTES(IdCliente),
+		FOREIGN KEY (TipodeFiesta) REFERENCES Tipodefiestas(Id)");
+
+	//CREAR TABLA TIPO DE FIESTAS.
+
+	myqli_query($c,"CREATE TABLE IF NOT EXISTS Tipodefiestas(
+		Id INT AUTO_INCREMENT,
+		Descripcion VARCHAR(30)")
+	myqli_exist($c);
 }
 
 function NuevosClientes(){
